@@ -32,6 +32,10 @@ class FacebookController extends Controller
         foreach($response->getGraphEdge() as $page) {
             $data = $page->asArray();
 
+            /*
+             * In $data['access_token'] staat een access token dat niet verloopt, maar wat wel iedere +- 60 dagen ververst moet worden...
+             */
+
             $response = $fb->get('/' . $data['id'] . '/feed?fields=full_picture,message,link&limit=5', $data['access_token']);
 
             $ps = $response->getGraphEdge()->asArray();
